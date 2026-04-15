@@ -21,7 +21,6 @@ phases:
       - docker push $REPO_URI:latest
 
       - echo "Preparing EC2 Key..."
-      - # This fix handles the single-line key format by restoring necessary newlines
       - echo "$EC2_KEY" | sed 's/-----BEGIN\(.*\)PRIVATE KEY----- /\n-----BEGIN\1PRIVATE KEY-----\n/; s/ -----END\(.*\)PRIVATE KEY-----/\n-----END\1PRIVATE KEY-----\n/' | tr -d '\r' > key.pem
       - chmod 400 key.pem
 

@@ -27,6 +27,7 @@ phases:
       - ssh-keyscan -H 54.235.58.130 >> ~/.ssh/known_hosts
 
       - ssh -i key.pem ec2-user@54.235.58.130 << 'EOF'
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 961776040935.dkr.ecr.us-east-1.amazonaws.com
           docker pull 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-docker-cicd-react-app:latest
           docker stop app || true
           docker rm app || true

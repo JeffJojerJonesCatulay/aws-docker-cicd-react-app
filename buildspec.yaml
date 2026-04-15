@@ -1,6 +1,25 @@
+version: 0.2
+
+env:
+  variables:
+    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-docker-cicd-react-app
+
 phases:
+  pre_build:
+    commands:
+      - echo "Login to ECR"
+      - aws ecr get-login-password | docker login --username AWS --password-stdin $REPO_URI
+
   build:
     commands:
+      - docker build -t aws-docker-cicd-react-app .
+      - docker tag aws-docker-cicd-react-app:latest $REPO_URI:latest
+
+  post_build:
+    commands:
+      - echo "Pushing image"
+      - docker push $REPO_URI:latest
+
       - echo "$EC2_KEY" > key.pem
       - chmod 400 key.pem
 

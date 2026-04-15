@@ -4,7 +4,7 @@ A containerized React application deployed using a full CI/CD pipeline on AWS. T
 
 Every code push triggers a pipeline that builds the React app, packages it into a Docker image, pushes it to a container registry, and updates the running application on EC2—showcasing a complete end-to-end DevOps workflow.
 
-![Architecture Diagram](docs/archi-upd.png)
+![Architecture Diagram](archi-upd.png)
 
 
 > [!NOTE]

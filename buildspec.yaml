@@ -24,9 +24,9 @@ phases:
       - chmod 400 key.pem
 
       - mkdir -p ~/.ssh
-      - ssh-keyscan -H 172.31.27.146 >> ~/.ssh/known_hosts
+      - ssh-keyscan -H 54.235.58.130 >> ~/.ssh/known_hosts
 
-      - ssh -i key.pem ec2-user@172.31.27.146 << 'EOF'
+      - ssh -i key.pem ec2-user@54.235.58.130 << 'EOF'
           docker pull 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-docker-cicd-react-app:latest
           docker stop app || true
           docker rm app || true

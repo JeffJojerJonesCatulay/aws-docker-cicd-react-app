@@ -19,7 +19,7 @@ function App() {
       </div>
 
       <div className="version-note">
-        This is version 4, this will change to test the CICD
+        This is version 5, this will change to test the CICD
       </div>
     </div>
   )

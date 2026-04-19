@@ -3,26 +3,31 @@ version: 0.2
 env:
   variables:
     REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-fullstack-cicd-react-lambda
+    ECR_DOMAIN: 961776040935.dkr.ecr.us-east-1.amazonaws.com
+    EC2_IP: 54.204.239.16
 
 phases:
   pre_build:
     commands:
-      - echo "Login to ECR"
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 961776040935.dkr.ecr.us-east-1.amazonaws.com
+      - echo "Authenticating with ECR..."
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_DOMAIN
 
   build:
     commands:
-      - docker build -t image_repo/aws-fullstack-cicd-react-lambda .
-      - docker tag image_repo/aws-fullstack-cicd-react-lambda:latest $REPO_URI:latest
+      - echo "Building Docker image..."
+      - docker build -t $REPO_URI:latest .
 
   post_build:
     commands:
-      - echo "Pushing image"
+      - echo "Pushing image to ECR..."
       - docker push $REPO_URI:latest
 
-      - echo "Preparing EC2 Key..."
+      - echo "Preparing EC2 deployment..."
       - echo "$EC2_KEY" | sed 's/-----BEGIN\(.*\)PRIVATE KEY----- /\n-----BEGIN\1PRIVATE KEY-----\n/; s/ -----END\(.*\)PRIVATE KEY-----/\n-----END\1PRIVATE KEY-----\n/' | tr -d '\r' > key.pem
       - chmod 400 key.pem
-
-      - echo "Deploying to EC2..."
-      - ssh -i key.pem -o StrictHostKeyChecking=no -o PubkeyAcceptedAlgorithms=+ssh-rsa ec2-user@54.204.239.16 "aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 961776040935.dkr.ecr.us-east-1.amazonaws.com && sudo docker pull 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-fullstack-cicd-react-lambda:latest && sudo docker stop app || true && sudo docker rm app || true && sudo docker run -d -p 80:80 --name app 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-fullstack-cicd-react-lambda:latest"
+      
+      - echo "Fetching remote auth token..."
+      - REMOTE_TOKEN=$(aws ecr get-login-password --region us-east-1)
+      
+      - echo "Executing remote deployment..."
+      - ssh -i key.pem -o StrictHostKeyChecking=no -o PubkeyAcceptedAlgorithms=+ssh-rsa ec2-user@$EC2_IP "echo $REMOTE_TOKEN | sudo docker login --username AWS --password-stdin $ECR_DOMAIN && sudo docker pull $REPO_URI:latest && sudo docker stop app || true && sudo docker rm app || true && sudo docker run -d -p 80:80 --name app $REPO_URI:latest"

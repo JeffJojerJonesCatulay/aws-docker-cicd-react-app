@@ -4,10 +4,18 @@ A containerized React application deployed using a full CI/CD pipeline on AWS. T
 
 Every code push triggers a pipeline that builds the React app, packages it into a Docker image, pushes it to a container registry, and updates the running application on EC2—showcasing a complete end-to-end DevOps workflow.
 
-![Architecture Diagram](archi-upd.png)
+![Core CI/CD Architecture](archi-upd.png)
 
 ### Additional Project: aws-fullstack-cicd-react-lambda
 Full-stack AWS project using React (Docker on EC2) integrated with a serverless backend (API Gateway + Lambda), deployed via a CI/CD pipeline using CodePipeline, CodeBuild, and ECR.
+
+#### Advanced Delivery Infrastructure (v2)
+This updated flow integrates **Amazon CloudFront** for global content delivery and an **Application Load Balancer (ALB)** with **Target Groups** to manage traffic and ensure high availability for the containerized application.
+
+![Enterprise Delivery Architecture](archi-upd_v2.png)
+
+#### Serverless Backend Integration
+In addition to the containerized frontend, this project integrates a serverless backend for dynamic data processing.
 
 ![Serverless Architecture](aws-fullstack-cicd-react-lambda-archi.png)
 
@@ -25,6 +33,8 @@ Full-stack AWS project using React (Docker on EC2) integrated with a serverless 
 * Amazon API Gateway (REST API)
 * AWS Lambda (Serverless Compute)
 * Amazon CloudWatch (Build logging & Monitoring)
+* Amazon CloudFront (CDN)
+* Application Load Balancer (ALB) & Target Groups
 
 ### Key Features
 
@@ -34,6 +44,8 @@ Full-stack AWS project using React (Docker on EC2) integrated with a serverless 
 * Low-cost, production-style setup
 * Serverless backend integration (API Gateway + Lambda)
 * Real-time build logs via Amazon CloudWatch
+* Global content delivery via CloudFront
+* Load balancing and high availability (ALB)
 
 ### Purpose
 

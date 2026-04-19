@@ -24,6 +24,7 @@ Full-stack AWS project using React (Docker on EC2) integrated with a serverless 
 * AWS CodePipeline & CodeBuild (CI/CD)
 * Amazon API Gateway (REST API)
 * AWS Lambda (Serverless Compute)
+* Amazon CloudWatch (Build logging & Monitoring)
 
 ### Key Features
 
@@ -32,6 +33,7 @@ Full-stack AWS project using React (Docker on EC2) integrated with a serverless 
 * Continuous deployment to cloud infrastructure
 * Low-cost, production-style setup
 * Serverless backend integration (API Gateway + Lambda)
+* Real-time build logs via Amazon CloudWatch
 
 ### Purpose
 

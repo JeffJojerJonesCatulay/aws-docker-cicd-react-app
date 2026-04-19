@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM node:20-alpine AS build
+FROM public.ecr.aws/docker/library/node:20-alpine AS build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve stage
-FROM nginx:stable-alpine
+FROM public.ecr.aws/nginx/nginx:stable-alpine
 
 # Copy the build output (dist folder for Vite) to nginx directory
 COPY --from=build /app/dist /usr/share/nginx/html

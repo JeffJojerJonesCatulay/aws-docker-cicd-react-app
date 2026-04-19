@@ -6,6 +6,11 @@ Every code push triggers a pipeline that builds the React app, packages it into 
 
 ![Architecture Diagram](docs/archi-upd.png)
 
+### Additional Project: aws-fullstack-cicd-react-lambda
+Full-stack AWS project using React (Docker on EC2) integrated with a serverless backend (API Gateway + Lambda), deployed via a CI/CD pipeline using CodePipeline, CodeBuild, and ECR.
+
+![Serverless Architecture](docs/aws-fullstack-cicd-react-lambda-archi.png)
+
 
 > [!NOTE]
 > **Focus & Authorship**: This project is primarily designed to explore **CI/CD on AWS services** rather than the React frontend itself. The application code was created using **Google Antigravity** to provide a functional foundation for the automation pipeline.
@@ -17,6 +22,8 @@ Every code push triggers a pipeline that builds the React app, packages it into 
 * Amazon ECR (image registry)
 * Amazon EC2 (deployment target)
 * AWS CodePipeline & CodeBuild (CI/CD)
+* Amazon API Gateway (REST API)
+* AWS Lambda (Serverless Compute)
 
 ### Key Features
 
@@ -24,6 +31,7 @@ Every code push triggers a pipeline that builds the React app, packages it into 
 * Docker-based application delivery
 * Continuous deployment to cloud infrastructure
 * Low-cost, production-style setup
+* Serverless backend integration (API Gateway + Lambda)
 
 ### Purpose
 

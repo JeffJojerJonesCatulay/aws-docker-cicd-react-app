@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-cicd-event-driven-platform
+    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image-repo/aws-cicd-event-driven-platform
     ECR_DOMAIN: 961776040935.dkr.ecr.us-east-1.amazonaws.com
     INSTANCE_ID: i-08f00525b20b26287
 

@@ -2,9 +2,9 @@ version: 0.2
 
 env:
   variables:
-    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-fullstack-cicd-react-lambda
+    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image_repo/aws-cicd-event-driven-platform
     ECR_DOMAIN: 961776040935.dkr.ecr.us-east-1.amazonaws.com
-    EC2_IP: 54.204.239.16
+    INSTANCE_ID: i-08f00525b20b26287
 
 phases:
   pre_build:
@@ -22,12 +22,5 @@ phases:
       - echo "Pushing image to ECR..."
       - docker push $REPO_URI:latest
 
-      - echo "Preparing EC2 deployment..."
-      - echo "$EC2_KEY" | sed 's/-----BEGIN\(.*\)PRIVATE KEY----- /\n-----BEGIN\1PRIVATE KEY-----\n/; s/ -----END\(.*\)PRIVATE KEY-----/\n-----END\1PRIVATE KEY-----\n/' | tr -d '\r' > key.pem
-      - chmod 400 key.pem
-      
-      - echo "Fetching remote auth token..."
-      - REMOTE_TOKEN=$(aws ecr get-login-password --region us-east-1)
-      
-      - echo "Executing remote deployment..."
-      - ssh -i key.pem -o StrictHostKeyChecking=no -o PubkeyAcceptedAlgorithms=+ssh-rsa ec2-user@$EC2_IP "echo $REMOTE_TOKEN | sudo docker login --username AWS --password-stdin $ECR_DOMAIN && sudo docker pull $REPO_URI:latest && sudo docker stop app || true && sudo docker rm app || true && sudo docker run -d -p 80:80 --name app $REPO_URI:latest"
+      - echo "Executing remote deployment via AWS SSM..."
+      - aws ssm send-command --instance-ids "$INSTANCE_ID" --document-name "AWS-RunShellScript" --parameters "commands=['aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin $ECR_DOMAIN', 'sudo docker pull $REPO_URI:latest', 'sudo docker stop app || true', 'sudo docker rm app || true', 'sudo docker run -d -p 80:80 --name app $REPO_URI:latest']" --region us-east-1

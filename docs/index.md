@@ -9,10 +9,10 @@ Every code push triggers a pipeline that builds the React app, packages it into 
 ### Additional Project: aws-fullstack-cicd-react-lambda
 Full-stack AWS project using React (Docker on EC2) integrated with a serverless backend (API Gateway + Lambda), deployed via a CI/CD pipeline using CodePipeline, CodeBuild, and ECR.
 
-#### Advanced Delivery Infrastructure (v2)
-This updated flow integrates **Amazon CloudFront** for global content delivery and an **Application Load Balancer (ALB)** with **Target Groups** to manage traffic and ensure high availability for the containerized application.
+#### Advanced Delivery Infrastructure (v4)
+This version adds a robust **Backend Services** layer. The React application communicates with **Amazon API Gateway**, which triggers **AWS Lambda** functions for processing. Lambda manages data persistence in **Amazon RDS** and initiates an asynchronous event-driven flow via **Amazon SQS** and **Amazon SNS** for email notifications. Deployments are now securely managed using **AWS Systems Manager (SSM)**.
 
-![Enterprise Delivery Architecture](archi-upd_v2.png)
+![Full-Stack Enterprise Architecture](archi-upd_v4.png)
 
 #### Serverless Backend Integration
 In addition to the containerized frontend, this project integrates a serverless backend for dynamic data processing.
@@ -32,6 +32,9 @@ In addition to the containerized frontend, this project integrates a serverless 
 * AWS CodePipeline & CodeBuild (CI/CD)
 * Amazon API Gateway (REST API)
 * AWS Lambda (Serverless Compute)
+* Amazon RDS (Database)
+* Amazon SQS & SNS (Event-driven Messaging)
+* AWS Systems Manager (SSM) Deployment
 * Amazon CloudWatch (Build logging & Monitoring)
 * Amazon CloudFront (CDN)
 * Application Load Balancer (ALB) & Target Groups
@@ -46,6 +49,8 @@ In addition to the containerized frontend, this project integrates a serverless 
 * Real-time build logs via Amazon CloudWatch
 * Global content delivery via CloudFront
 * Load balancing and high availability (ALB)
+* Event-driven notifications (SQS/SNS)
+* Secure agent-based deployments (SSM)
 
 ### Purpose
 

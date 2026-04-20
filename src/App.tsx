@@ -5,6 +5,10 @@ function App() {
   const [data, setData] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [createStatus, setCreateStatus] = useState<string | null>(null);
+  const [messages, setMessages] = useState<any[] | null>(null);
 
   const handleTrigger = async () => {
     setLoading(true);
@@ -14,6 +18,46 @@ function App() {
       if (!response.ok) throw new Error('Failed to fetch data');
       const result = await response.json();
       setData(result);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setCreateStatus(null);
+    setError(null);
+    try {
+      const response = await fetch('https://74a9ccanzj.execute-api.us-east-1.amazonaws.com/create-user/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, message }),
+      });
+      if (!response.ok) throw new Error('Failed to send message');
+      setCreateStatus('Success! Message sent to the platform.');
+      setName('');
+      setMessage('');
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGetMessages = async () => {
+    setLoading(true);
+    setMessages(null);
+    setError(null);
+    try {
+      const response = await fetch('https://74a9ccanzj.execute-api.us-east-1.amazonaws.com/get-user/get');
+      if (!response.ok) throw new Error('Failed to fetch messages');
+      const result = await response.json();
+      setMessages(Array.isArray(result) ? result : [result]);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -39,10 +83,12 @@ function App() {
       </div>
 
       <div className="focus-box">
+        <div className="project-tag">Full-Stack Deployment</div>
         <h2>Additional Project: aws-fullstack-cicd-react-lambda</h2>
         <p>
-          Full-stack AWS project using React (Docker on EC2) integrated with a serverless backend 
-          (API Gateway + Lambda), deployed via a CI/CD pipeline using CodePipeline, CodeBuild, and ECR.
+          Full-stack AWS project using <strong>React (Docker on EC2)</strong> integrated with a 
+          <strong> serverless backend </strong> (API Gateway + Lambda), deployed via a 
+          <strong> CI/CD pipeline </strong> using CodePipeline, CodeBuild, and ECR.
         </p>
         <button 
           className="trigger-button" 
@@ -66,8 +112,83 @@ function App() {
         )}
       </div>
 
+      <div className="focus-box">
+        <div className="project-tag">Event-Driven Architecture</div>
+        <h2>Additional Project: aws-cicd-event-driven-platform</h2>
+        <p>
+          An end-to-end AWS architecture demonstrating <strong>CI/CD automation</strong>, 
+          <strong> containerized frontend deployment </strong> on EC2, and a 
+          <strong> serverless backend</strong>.
+        </p>
+        <p>
+          The system processes user requests through <strong>API Gateway and Lambda</strong>, 
+          persists data in <strong>RDS</strong>, and leverages <strong>SQS and SNS</strong> for 
+          asynchronous, event-driven workflows. Deployment is automated using 
+          <strong> CodePipeline and CodeBuild </strong> with SSM-based execution.
+        </p>
+      </div>
+
+      <div className="focus-box">
+        <div className="project-tag">Interactive Demo</div>
+        <h2>Trigger Event Flow</h2>
+        <p>Submit your name and a message to trigger the platform's backend workflow.</p>
+        <form onSubmit={handleCreate} className="message-form">
+          <div className="input-group">
+            <input 
+              type="text" 
+              placeholder="Name" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <textarea 
+              placeholder="Message" 
+              value={message}
+              rows={3}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+          </div>
+          <button 
+            type="submit" 
+            className="trigger-button"
+            disabled={loading}
+          >
+            {loading ? 'Processing...' : 'Submit Message'}
+          </button>
+        </form>
+        {createStatus && <div className="success-message">{createStatus}</div>}
+      </div>
+
+      <div className="focus-box">
+        <div className="project-tag">Data Retrieval</div>
+        <h2>Recent Messages</h2>
+        <p>Fetch the most recent messages processed by the event-driven platform.</p>
+        <button 
+          className="trigger-button" 
+          onClick={handleGetMessages}
+          disabled={loading}
+        >
+          {loading ? 'Fetching...' : 'Fetch Messages'}
+        </button>
+
+        {messages && (
+          <div className="api-results">
+            {messages.map((msg: any, index: number) => (
+              <div key={index} className="result-item">
+                <span className="user-name">{msg.name}:</span>
+                <span className="user-phrase">"{msg.message}"</span>
+              </div>
+            ))}
+          </div>
+        )}
+        {error && <div className="error-message">Error: {error}</div>}
+      </div>
+
       <div className="version-note">
-        This is version 8, this will change to test the CICD
+        This is version 13, this will change to test the CICD
       </div>
     </div>
   )

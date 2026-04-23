@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - docker build -t image-repo/aws-ecs-fargate-cicd-app .
-      - docker push image-repo/aws-ecs-fargate-cicd-app
+      - docker push 961776040935.dkr.ecr.us-east-1.amazonaws.com/image-repo/aws-ecs-fargate-cicd-app:latest
 
   post_build:
     commands:

@@ -14,10 +14,20 @@ In addition to the containerized frontend, this project integrates a serverless 
 ### Additional Project: aws-fullstack-cicd-react-lambda
 Full-stack AWS project using React (Docker on EC2) integrated with a serverless backend (API Gateway + Lambda), deployed via a CI/CD pipeline using CodePipeline, CodeBuild, and ECR.
 
+#### Serverless Backend Integration
+In addition to the containerized frontend, this project integrates a serverless backend for dynamic data processing.
+
+![Serverless Architecture](docs/aws-fullstack-cicd-react-lambda-archi.png)
+
 #### Advanced Delivery Infrastructure (v4)
 This version adds a robust **Backend Services** layer. The React application communicates with **Amazon API Gateway**, which triggers **AWS Lambda** functions for processing. Lambda manages data persistence in **Amazon RDS** and initiates an asynchronous event-driven flow via **Amazon SQS** and **Amazon SNS** for email notifications. Deployments are now securely managed using **AWS Systems Manager (SSM)**.
 
 ![Full-Stack Enterprise Architecture](docs/archi-upd_v4.png)
+
+### Additional Project: aws-ecs-fargate-cicd-app
+A containerized web application deployed using Amazon ECS with AWS Fargate, integrated with a full CI/CD pipeline using AWS CodePipeline and AWS CodeBuild. The application is built as a Docker image, stored in Amazon ECR, and served through an Elastic Load Balancing, demonstrating automated deployments and scalable container orchestration on AWS.
+
+![ECS Fargate CI/CD Architecture](docs/aws-ecs-fargate-cicd-app-archi.png)
 
 > [!NOTE]
 > **Focus & Authorship**: This project is primarily designed to explore **CI/CD on AWS services** rather than the React frontend itself. The application code was created using **Google Antigravity** to provide a functional foundation for the automation pipeline.

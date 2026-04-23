@@ -19,6 +19,11 @@ This version adds a robust **Backend Services** layer. The React application com
 
 ![Full-Stack Enterprise Architecture](archi-upd_v4.png)
 
+### Additional Project: aws-ecs-fargate-cicd-app
+A containerized web application deployed using Amazon ECS with AWS Fargate, integrated with a full CI/CD pipeline using AWS CodePipeline and AWS CodeBuild. The application is built as a Docker image, stored in Amazon ECR, and served through an Elastic Load Balancing, demonstrating automated deployments and scalable container orchestration on AWS.
+
+![ECS Fargate CI/CD Architecture](aws-ecs-fargate-cicd-app-archi.png)
+
 > [!NOTE]
 > **Focus & Authorship**: This project is primarily designed to explore **CI/CD on AWS services** rather than the React frontend itself. The application code was created using **Google Antigravity** to provide a functional foundation for the automation pipeline.
 

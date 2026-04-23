@@ -32,7 +32,8 @@ A containerized web application deployed using Amazon ECS with AWS Fargate, inte
 * React (frontend)
 * Docker (containerization)
 * Amazon ECR (image registry)
-* Amazon EC2 (deployment target)
+* Amazon EC2 & AWS Fargate (deployment targets)
+* Amazon ECS (Container Orchestration)
 * AWS CodePipeline & CodeBuild (CI/CD)
 * Amazon API Gateway (REST API)
 * AWS Lambda (Serverless Compute)
@@ -48,6 +49,7 @@ A containerized web application deployed using Amazon ECS with AWS Fargate, inte
 * Automated build and deployment pipeline
 * Docker-based application delivery
 * Continuous deployment to cloud infrastructure
+* Serverless Container Orchestration (ECS Fargate)
 * Low-cost, production-style setup
 * Serverless backend integration (API Gateway + Lambda)
 * Real-time build logs via Amazon CloudWatch

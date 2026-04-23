@@ -6,11 +6,6 @@ Every code push triggers a pipeline that builds the React app, packages it into 
 
 ![Core CI/CD Architecture](docs/archi-upd.png)
 
-#### Serverless Backend Integration
-In addition to the containerized frontend, this project integrates a serverless backend for dynamic data processing.
-
-![Serverless Architecture](docs/aws-fullstack-cicd-react-lambda-archi.png)
-
 ### Additional Project: aws-fullstack-cicd-react-lambda
 Full-stack AWS project using React (Docker on EC2) integrated with a serverless backend (API Gateway + Lambda), deployed via a CI/CD pipeline using CodePipeline, CodeBuild, and ECR.
 

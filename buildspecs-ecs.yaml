@@ -17,7 +17,10 @@ phases:
 
   post_build:
     commands:
-      - printf '[{"name":"react-app","imageUri":"%s"}]' $REPO_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo "Creating imagedefinitions.json..."
+      - echo "[{\"name\":\"react-app\",\"imageUri\":\"$REPO_URI:$IMAGE_TAG\"}]" > imagedefinitions.json
+      - echo "File content:"
+      - cat imagedefinitions.json
 
 artifacts:
   files:

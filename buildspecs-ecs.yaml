@@ -1,15 +1,18 @@
 version: 0.2
 
+env:
+  variables:
+    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image-repo/aws-ecs-fargate-cicd-app
+    IMAGE_TAG: latest
+
 phases:
   pre_build:
     commands:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 961776040935.dkr.ecr.us-east-1.amazonaws.com
-      - REPO_URI=961776040935.dkr.ecr.us-east-1.amazonaws.com/image-repo/aws-ecs-fargate-cicd-app
-      - IMAGE_TAG=latest
 
   build:
     commands:
-      - docker build -t $REPO_URI .
+      - docker build -t $REPO_URI:$IMAGE_TAG .
       - docker push $REPO_URI:$IMAGE_TAG
 
   post_build:

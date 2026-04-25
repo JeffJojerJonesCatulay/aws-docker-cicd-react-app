@@ -129,6 +129,14 @@ function App() {
       </div>
 
       <div className="focus-box">
+        <div className="project-tag">Kubernetes Deployment</div>
+        <h2>Additional Project: aws-eks-kubernetes-cicd-app</h2>
+        <p>
+          A complete DevOps pipeline that builds a Dockerized application, pushes it to Amazon ECR, and automatically deploys it to a Kubernetes cluster on <strong>Amazon EKS</strong> using AWS CodePipeline and AWS CodeBuild. This project demonstrates real-world CI/CD with Kubernetes on AWS.
+        </p>
+      </div>
+
+      <div className="focus-box">
         <div className="project-tag">Interactive Demo</div>
         <h2>Trigger Event Flow</h2>
         <p>Submit your name and a message to trigger the platform's backend workflow.</p>

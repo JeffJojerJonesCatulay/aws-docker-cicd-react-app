@@ -24,6 +24,14 @@ A containerized web application deployed using Amazon ECS with AWS Fargate, inte
 
 ![ECS Fargate CI/CD Architecture](docs/aws-ecs-fargate-cicd-app-archi.png)
 
+### Additional Project: aws-eks-kubernetes-cicd-app
+A complete DevOps pipeline that builds a Dockerized application, pushes it to Amazon ECR, and automatically deploys it to a Kubernetes cluster on Amazon EKS using AWS CodePipeline and AWS CodeBuild. This project demonstrates real-world CI/CD with Kubernetes on AWS.
+
+![EKS Kubernetes CI/CD Architecture](docs/aws-eks-kubernetes-cicd-app-archi.png)
+
+> [!NOTE]
+> **Author's Note on Kubernetes**: I am still relatively new to Kubernetes. This specific project serves as a practical, hands-on milestone in my ongoing learning journey to better understand cluster management and container orchestration on AWS.
+
 > [!NOTE]
 > **Focus & Authorship**: This project is primarily designed to explore **CI/CD on AWS services** rather than the React frontend itself. The application code was created using **Google Antigravity** to provide a functional foundation for the automation pipeline.
 
@@ -33,7 +41,7 @@ A containerized web application deployed using Amazon ECS with AWS Fargate, inte
 * Docker (containerization)
 * Amazon ECR (image registry)
 * Amazon EC2 & AWS Fargate (deployment targets)
-* Amazon ECS (Container Orchestration)
+* Amazon ECS & Amazon EKS (Container Orchestration & Kubernetes)
 * AWS CodePipeline & CodeBuild (CI/CD)
 * Amazon API Gateway (REST API)
 * AWS Lambda (Serverless Compute)
@@ -50,6 +58,7 @@ A containerized web application deployed using Amazon ECS with AWS Fargate, inte
 * Docker-based application delivery
 * Continuous deployment to cloud infrastructure
 * Serverless Container Orchestration (ECS Fargate)
+* Kubernetes Cluster Management (Amazon EKS)
 * Low-cost, production-style setup
 * Serverless backend integration (API Gateway + Lambda)
 * Real-time build logs via Amazon CloudWatch

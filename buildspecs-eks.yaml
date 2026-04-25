@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Setting image tag..."
+      - IMAGE_TAG=v1.0.$CODEBUILD_BUILD_NUMBER
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 961776040935.dkr.ecr.us-east-1.amazonaws.com
+      - REPO_URI=961776040935.dkr.ecr.us-east-1.amazonaws.com/image-repo/eks-react-app
+
+  build:
+    commands:
+      - echo "Building Docker image with tag $IMAGE_TAG..."
+      - docker build -t $REPO_URI:$IMAGE_TAG .
+      - echo "Pushing Docker image..."
+      - docker push $REPO_URI:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - echo "Updating kubeconfig..."
+      - aws eks update-kubeconfig --region us-east-1 --name eks-react-cluster
+      - echo "Applying Kubernetes resources..."
+      - sed -i "s/\$IMAGE_TAG/$IMAGE_TAG/g" deployment.yaml
+      - kubectl apply -f deployment.yaml
+      - kubectl apply -f service.yaml

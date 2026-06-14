@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/image-repo/aws-ecs-fargate-cicd-app
+    REPO_URI: 961776040935.dkr.ecr.us-east-1.amazonaws.com/app-images-global-30620849894
 
 phases:
   pre_build:
